@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>영화 정보</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 40px 16px;
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      background: #f4f4f6;
+      color: #222;
+    }
+    h1 { text-align: center; margin: 0 0 32px; }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    .card h2 { margin: 0 0 4px; }
+    .card .original { color: #777; margin: 0 0 16px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 8px 4px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+    th { width: 90px; color: #555; font-weight: 600; }
+    .summary { margin-top: 16px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <h1>영화 정보</h1>
+  <div class="container" id="movies"></div>
+
+  <script>
+    const movies = [
+      {
+        title: "인터스텔라",
+        original: "Interstellar",
+        year: 2014,
+        director: "크리스토퍼 놀란",
+        cast: "매튜 맥커너히, 앤 해서웨이, 제시카 차스테인, 마이클 케인",
+        genre: "SF, 드라마, 모험",
+        runtime: "169분",
+        country: "미국, 영국",
+        release: "2014년 11월 6일 (국내)",
+        awards: "제87회 아카데미 시각효과상",
+        summary: "황폐해진 지구를 대신할 새 터전을 찾기 위해 전직 우주비행사 쿠퍼와 탐사대가 웜홀을 지나 머나먼 은하로 떠나는 이야기."
+      },
+      {
+        title: "기생충",
+        original: "Parasite",
+        year: 2019,
+        director: "봉준호",
+        cast: "송강호, 이선균, 조여정, 최우식, 박소담",
+        genre: "드라마, 스릴러, 블랙코미디",
+        runtime: "132분",
+        country: "대한민국",
+        release: "2019년 5월 30일",
+        awards: "제72회 칸 영화제 황금종려상, 제92회 아카데미 작품상·감독상·각본상·국제장편영화상",
+        summary: "전원 백수인 기택네 장남 기우가 부잣집 박 사장네 과외 선생이 되면서, 전혀 다른 두 가족 사이에 걷잡을 수 없는 일이 벌어지는 이야기."
+      }
+    ];
+
+    const fields = [
+      ["개봉연도", "year"],
+      ["감독", "director"],
+      ["출연", "cast"],
+      ["장르", "genre"],
+      ["상영시간", "runtime"],
+      ["제작국가", "country"],
+      ["개봉일", "release"],
+      ["수상", "awards"]
+    ];
+
+    const container = document.getElementById("movies");
+    movies.forEach(movie => {
+      const rows = fields
+        .map(([label, key]) => `<tr><th>${label}</th><td>${movie[key]}</td></tr>`)
+        .join("");
+      container.innerHTML += `
+        <div class="card">
+          <h2>${movie.title}</h2>
+          <p class="original">${movie.original}</p>
+          <table>${rows}</table>
+          <p class="summary">${movie.summary}</p>
+        </div>`;
+    });
+  </script>
+</body>
+</html>
